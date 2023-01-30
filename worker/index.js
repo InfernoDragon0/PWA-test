@@ -29,7 +29,19 @@ self.addEventListener('push', function (event) {
   import { getMessaging } from "firebase/messaging";
 import { onBackgroundMessage } from "firebase/messaging/sw";
 
-const messaging = getMessaging();
+const firebaseConfig = {
+    apiKey: "AIzaSyDqUbUiCcRilLq8mJfo3p3csfUx9o6FN7E",
+    authDomain: "canteen-e81e1.firebaseapp.com",
+    projectId: "canteen-e81e1",
+    storageBucket: "canteen-e81e1.appspot.com",
+    messagingSenderId: "345832195402",
+    appId: "1:345832195402:web:308ae5c28cfb3accb8adb3",
+    measurementId: "G-D1C80TS1FY"
+  };
+
+const app = initializeApp(firebaseConfig);
+const messaging = getMessaging(app);
+
 onBackgroundMessage(messaging, (payload) => {
   console.log('[firebase-messaging-sw.js] Received background message ', payload);
   // Customize notification here
