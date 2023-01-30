@@ -9,6 +9,7 @@ export default function Home() {
   const [subscription, setSubscription] = useState(null)
   const [registration, setRegistration] = useState(null)
   const [token, setToken] = useState("")
+  const [messagepayload, setMessagePayload] = useState("")
 
 
   useEffect(() => {
@@ -45,6 +46,7 @@ export default function Home() {
         onMessage(messaging, (payload) => {
           console.log('Message received. ', payload);
           // ...
+          setMessagePayload(JSON.stringify(payload))
         });
 
         getToken(messaging, {vapidKey: "BEY8Hn71h2eqsd9JkfrqV0pC3oJYqDJljlLg7u98qW7nV1P_IoDl3AHJ7q6RXAI5RiOVYPMh-8jk59vV5MdQVLY"}).then((currentToken) => {
@@ -160,6 +162,8 @@ export default function Home() {
         <button onClick={sendNotificationButtonOnClick}>Send Web Push Notification</button>
         <p>Your token is</p>
         <p>{token}</p>
+
+        <p>{messagepayload}</p>
 
         <p className={styles.description}>
           Get started by editing{' '}
