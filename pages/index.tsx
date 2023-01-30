@@ -1,11 +1,26 @@
 import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css'
+import { initializeApp } from 'firebase/app';
+import { getMessaging, getToken } from "firebase/messaging";
 
 export default function Home() {
   const [installPromptEvent, setInstallPromptEvent] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(false)
   const [subscription, setSubscription] = useState(null)
   const [registration, setRegistration] = useState(null)
+  const [token, setToken] = useState("")
+  const firebaseConfig = {
+    apiKey: "AIzaSyDqUbUiCcRilLq8mJfo3p3csfUx9o6FN7E",
+    authDomain: "canteen-e81e1.firebaseapp.com",
+    projectId: "canteen-e81e1",
+    storageBucket: "canteen-e81e1.appspot.com",
+    messagingSenderId: "345832195402",
+    appId: "1:345832195402:web:308ae5c28cfb3accb8adb3",
+    measurementId: "G-D1C80TS1FY"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const messaging = getMessaging(app);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (event: any) => {
@@ -49,10 +64,12 @@ export default function Home() {
     });
   };
 
-  const notificationApp = () => {
-    Notification.requestPermission().then((result) => {
+  const notificationApp = async () => {
+    Notification.requestPermission().then(async (result) => {
       if (result === 'granted') {
-        randomNotification();
+        setToken(await getToken(messaging, {vapidKey: process.env.WEB_PUSH_PRIVATE_KEY}))
+
+        //randomNotification();
       }
     });
   };
@@ -123,6 +140,8 @@ export default function Home() {
         <button onClick={notificationApp}>Accept Agreement to Notifications</button>
         <button onClick={subscribeButtonOnClick}>Subscribe to Web Push</button>
         <button onClick={sendNotificationButtonOnClick}>Send Web Push Notification</button>
+        <p>Your token is</p>
+        <p>{token}</p>
 
         <p className={styles.description}>
           Get started by editing{' '}

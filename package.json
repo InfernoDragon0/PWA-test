@@ -7,6 +7,7 @@
     "vapid": "web-push generate-vapid-keys"
   },
   "dependencies": {
+    "firebase": "^9.16.0",
     "next": "latest",
     "next-pwa": "^5.6.0",
     "react": "^18.2.0",
