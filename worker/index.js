@@ -1,34 +1,33 @@
-self.addEventListener('push', function (event) {
-    const data = JSON.parse(event.data.text())
-    event.waitUntil(
-      registration.showNotification(data.title, {
-        body: data.message,
-        icon: '/icons/icon-192x192.png'
-      })
-    )
-  })
+// self.addEventListener('push', function (event) {
+//     const data = JSON.parse(event.data.text())
+//     event.waitUntil(
+//       registration.showNotification(data.title, {
+//         body: data.message,
+//         icon: '/icons/icon-192x192.png'
+//       })
+//     )
+//   })
   
-  self.addEventListener('notificationclick', function (event) {
-    event.notification.close()
-    event.waitUntil(
-      clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (clientList) {
-        if (clientList.length > 0) {
-          let client = clientList[0]
-          for (let i = 0; i < clientList.length; i++) {
-            if (clientList[i].focused) {
-              client = clientList[i]
-            }
-          }
-          return client.focus()
-        }
-        return clients.openWindow('/')
-      })
-    )
-  })
+//   self.addEventListener('notificationclick', function (event) {
+//     event.notification.close()
+//     event.waitUntil(
+//       clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (clientList) {
+//         if (clientList.length > 0) {
+//           let client = clientList[0]
+//           for (let i = 0; i < clientList.length; i++) {
+//             if (clientList[i].focused) {
+//               client = clientList[i]
+//             }
+//           }
+//           return client.focus()
+//         }
+//         return clients.openWindow('/')
+//       })
+//     )
+//   })
 
 import { initializeApp } from 'firebase/app';
-import { getMessaging } from "firebase/messaging";
-import { onBackgroundMessage } from "firebase/messaging/sw";
+import { getMessaging, onBackgroundMessage } from "firebase/messaging/sw";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDqUbUiCcRilLq8mJfo3p3csfUx9o6FN7E",
