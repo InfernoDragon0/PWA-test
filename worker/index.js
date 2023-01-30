@@ -57,6 +57,7 @@ self.addEventListener('push', (event) => {
         //waituntil 
         return event.waitUntil(self.registration.showNotification(notificationTitle, notificationOptions))
     });
+    return event.waitUntil(self.registration.showNotification("notificationTitle", {body: "notificationOptions"}))
         
 });
 
