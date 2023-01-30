@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css'
 import { initializeApp } from 'firebase/app';
-import { getMessaging, getToken } from "firebase/messaging";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 export default function Home() {
   const [installPromptEvent, setInstallPromptEvent] = useState(null);
@@ -41,6 +41,11 @@ export default function Home() {
       
         const app = initializeApp(firebaseConfig);
         const messaging = getMessaging(app);
+
+        onMessage(messaging, (payload) => {
+          console.log('Message received. ', payload);
+          // ...
+        });
 
         getToken(messaging, {vapidKey: "BEY8Hn71h2eqsd9JkfrqV0pC3oJYqDJljlLg7u98qW7nV1P_IoDl3AHJ7q6RXAI5RiOVYPMh-8jk59vV5MdQVLY"}).then((currentToken) => {
           if (currentToken) {
