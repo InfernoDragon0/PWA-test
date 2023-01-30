@@ -25,7 +25,7 @@ export default function Home() {
       // run only in browser
       navigator.serviceWorker.ready.then(reg => {
         reg.pushManager.getSubscription().then(sub => {
-          if (sub && !(sub.expirationTime && Date.now() > sub.expirationTime - 5 * 60 * 1000)) {
+          if (sub) {
             setSubscription(sub as any)
             setIsSubscribed(true)
           }
