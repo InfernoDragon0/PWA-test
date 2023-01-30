@@ -42,16 +42,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
-onBackgroundMessage(messaging, (payload) => {
-  console.log('[firebase-messaging-sw.js] Received background message ', payload);
-  // Customize notification here
-  const notificationTitle = 'Background Message Title';
-  const notificationOptions = {
-    body: 'Background Message body.',
-    icon: '/icons/icon-192x192.png'
-  };
+self.addEventListener('push', (event) => {
+    console.log('[firebase-messaging-sw.js] Push received. ', event);
 
-  self.registration.showNotification(notificationTitle,
-    notificationOptions);
+    onBackgroundMessage(messaging, (payload) => {
+        console.log('[firebase-messaging-sw.js] Received background message ', payload);
+        // Customize notification here
+        const notificationTitle = 'Background Message Title';
+        const notificationOptions = {
+            body: 'Background Message body.',
+            icon: '/icons/icon-192x192.png'
+        };
+
+        //waituntil 
+        return event.waitUntil(self.registration.showNotification(notificationTitle, notificationOptions));    
+    });
+        
 });
+
 // [END messaging_on_background_message_modular]
