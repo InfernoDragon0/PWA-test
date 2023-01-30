@@ -42,7 +42,7 @@ export default function Home() {
         const app = initializeApp(firebaseConfig);
         const messaging = getMessaging(app);
 
-        getToken(messaging, {vapidKey: process.env.WEB_PUSH_PRIVATE_KEY}).then((currentToken) => {
+        getToken(messaging, {vapidKey: "BEY8Hn71h2eqsd9JkfrqV0pC3oJYqDJljlLg7u98qW7nV1P_IoDl3AHJ7q6RXAI5RiOVYPMh-8jk59vV5MdQVLY"}).then((currentToken) => {
           if (currentToken) {
             setToken(currentToken)
           } else {

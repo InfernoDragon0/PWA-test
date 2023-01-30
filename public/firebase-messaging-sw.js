@@ -17,4 +17,4 @@ const firebaseApp = initializeApp({
 // Retrieve an instance of Firebase Messaging so that it can handle background
 // messages.
 const messaging = getMessaging(firebaseApp);
-console.log(await getToken(messaging, {vapidKey: process.env.WEB_PUSH_PRIVATE_KEY}))
+console.log(await getToken(messaging, {vapidKey: "BEY8Hn71h2eqsd9JkfrqV0pC3oJYqDJljlLg7u98qW7nV1P_IoDl3AHJ7q6RXAI5RiOVYPMh-8jk59vV5MdQVLY"}))
