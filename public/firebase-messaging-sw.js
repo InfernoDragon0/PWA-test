@@ -1,5 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { getMessaging } from "firebase/messaging/sw";
+const { initializeApp } = require( "firebase/app");
+const { getMessaging } =require("firebase/messaging/sw")
 
 // Initialize the Firebase app in the service worker by passing in
 // your app's Firebase config object.
