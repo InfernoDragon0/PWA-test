@@ -3,7 +3,7 @@ importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compa
 // // Initialize the Firebase app in the service worker by passing in
 // // your app's Firebase config object.
 // // https://firebase.google.com/docs/web/setup#config-object
-firebaseApp.initializeApp({
+firebase.initializeApp({
     apiKey: "AIzaSyDqUbUiCcRilLq8mJfo3p3csfUx9o6FN7E",
     authDomain: "canteen-e81e1.firebaseapp.com",
     projectId: "canteen-e81e1",
