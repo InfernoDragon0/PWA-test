@@ -37,14 +37,7 @@ export default function Home() {
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-
-        <div>
-          {installed ? (
-            <p>App installed!</p>
-          ) : (
-            <button onClick={installApp}>Install App</button>
-          )}
-        </div>
+        <button onClick={installApp}>Install App</button>
 
         <p className={styles.description}>
           Get started by editing{' '}
