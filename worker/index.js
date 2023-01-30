@@ -55,10 +55,8 @@ self.addEventListener('push', (event) => {
         };
 
         //waituntil 
-        return event.waitUntil(self.registration.showNotification(notificationTitle, notificationOptions))
+        //return event.waitUntil(self.registration.showNotification(notificationTitle, notificationOptions))
     });
-    return event.waitUntil(self.registration.showNotification("notificationTitle", {body: "notificationOptions"}))
-        
 });
 
 // [END messaging_on_background_message_modular]
