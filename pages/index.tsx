@@ -1,12 +1,50 @@
+import { useEffect, useState } from 'react';
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
+  const [installPromptEvent, setInstallPromptEvent] = useState(null);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (event: any) => {
+      event.preventDefault();
+      setInstallPromptEvent(event);
+    };
+
+    window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const installApp = () => {
+    if (!installPromptEvent) return;
+
+    installPromptEvent.prompt();
+    installPromptEvent.userChoice.then((choice) => {
+      if (choice.outcome === "accepted") {
+        console.log("User accepted the install prompt");
+      } else {
+        console.log("User dismissed the install prompt");
+      }
+      setInstallPromptEvent(null);
+    });
+  };
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
+
+        <div>
+          {installed ? (
+            <p>App installed!</p>
+          ) : (
+            <button onClick={installApp}>Install App</button>
+          )}
+        </div>
 
         <p className={styles.description}>
           Get started by editing{' '}
