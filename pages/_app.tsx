@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import '../styles/globals.css'
 import { AppProps } from 'next/app'
-import { initializeApp } from 'firebase/app';
-import { getMessaging, getToken } from "firebase/messaging";
+
 
 
 export default function MyApp({ Component, pageProps }: AppProps) {
