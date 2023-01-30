@@ -26,7 +26,8 @@ self.addEventListener('push', function (event) {
     )
   })
 
-  import { getMessaging } from "firebase/messaging";
+import { initializeApp } from 'firebase/app';
+import { getMessaging } from "firebase/messaging";
 import { onBackgroundMessage } from "firebase/messaging/sw";
 
 const firebaseConfig = {
