@@ -39,6 +39,7 @@ export default function Home() {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator && (window as any).workbox !== undefined) {
       // run only in browser
       navigator.serviceWorker.ready.then(reg => {
+        navigator.serviceWorker.register("../firebase-messaging-sw.js")
         reg.pushManager.getSubscription().then(sub => {
           if (sub) {
             setSubscription(sub as any)
