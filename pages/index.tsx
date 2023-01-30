@@ -44,7 +44,7 @@ export default function Home() {
     const title = 'Notification ' + notif;
     const options = {
       body: 'This is the body of the notification',
-      icon: '/favicon.ico'
+      icon: '/icons/icon-192x192.png'
     };
     new Notification(title, options);
     setTimeout(randomNotification, 5000);
