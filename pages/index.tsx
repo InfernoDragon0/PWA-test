@@ -20,8 +20,8 @@ export default function Home() {
   const installApp = () => {
     if (!installPromptEvent) return;
 
-    installPromptEvent.prompt();
-    installPromptEvent.userChoice.then((choice) => {
+    (installPromptEvent as any).prompt();
+    (installPromptEvent as any).userChoice.then((choice: any) => {
       if (choice.outcome === "accepted") {
         console.log("User accepted the install prompt");
       } else {
