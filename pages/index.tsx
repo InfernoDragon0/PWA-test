@@ -29,7 +29,7 @@ export default function Home() {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator && (window as any).workbox !== undefined) {
       // run only in browser
       navigator.serviceWorker.ready.then(async (reg) => {
-        const idx = await navigator.serviceWorker.getRegistration("/sw.js")
+        //const idx = await navigator.serviceWorker.getRegistration("/sw.js")
         const firebaseConfig = {
           apiKey: "AIzaSyDqUbUiCcRilLq8mJfo3p3csfUx9o6FN7E",
           authDomain: "canteen-e81e1.firebaseapp.com",
@@ -49,7 +49,7 @@ export default function Home() {
           setMessagePayload(JSON.stringify(payload))
         });
 
-        getToken(messaging, {serviceWorkerRegistration: idx, vapidKey: "BEY8Hn71h2eqsd9JkfrqV0pC3oJYqDJljlLg7u98qW7nV1P_IoDl3AHJ7q6RXAI5RiOVYPMh-8jk59vV5MdQVLY"}).then((currentToken) => {
+        getToken(messaging, {vapidKey: "BEY8Hn71h2eqsd9JkfrqV0pC3oJYqDJljlLg7u98qW7nV1P_IoDl3AHJ7q6RXAI5RiOVYPMh-8jk59vV5MdQVLY"}).then((currentToken) => {
           if (currentToken) {
             setToken(currentToken)
           } else {
