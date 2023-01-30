@@ -9,18 +9,7 @@ export default function Home() {
   const [subscription, setSubscription] = useState(null)
   const [registration, setRegistration] = useState(null)
   const [token, setToken] = useState("")
-  const firebaseConfig = {
-    apiKey: "AIzaSyDqUbUiCcRilLq8mJfo3p3csfUx9o6FN7E",
-    authDomain: "canteen-e81e1.firebaseapp.com",
-    projectId: "canteen-e81e1",
-    storageBucket: "canteen-e81e1.appspot.com",
-    messagingSenderId: "345832195402",
-    appId: "1:345832195402:web:308ae5c28cfb3accb8adb3",
-    measurementId: "G-D1C80TS1FY"
-  };
 
-  const app = initializeApp(firebaseConfig);
-  const messaging = getMessaging(app);
 
   useEffect(() => {
     const handleBeforeInstallPrompt = (event: any) => {
@@ -40,6 +29,29 @@ export default function Home() {
       // run only in browser
       navigator.serviceWorker.ready.then(reg => {
         navigator.serviceWorker.register("../firebase-messaging-sw.js")
+        const firebaseConfig = {
+          apiKey: "AIzaSyDqUbUiCcRilLq8mJfo3p3csfUx9o6FN7E",
+          authDomain: "canteen-e81e1.firebaseapp.com",
+          projectId: "canteen-e81e1",
+          storageBucket: "canteen-e81e1.appspot.com",
+          messagingSenderId: "345832195402",
+          appId: "1:345832195402:web:308ae5c28cfb3accb8adb3",
+          measurementId: "G-D1C80TS1FY"
+        };
+      
+        const app = initializeApp(firebaseConfig);
+        const messaging = getMessaging(app);
+
+        getToken(messaging, {vapidKey: process.env.WEB_PUSH_PRIVATE_KEY}).then((currentToken) => {
+          if (currentToken) {
+            setToken(currentToken)
+          } else {
+            setToken('No registration token available. Request permission to generate one.');
+          }
+        }).catch((err) => {
+          setToken('An error occurred while retrieving token. ' + err);
+        });
+
         reg.pushManager.getSubscription().then(sub => {
           if (sub) {
             setSubscription(sub as any)
@@ -68,15 +80,7 @@ export default function Home() {
   const notificationApp = async () => {
     Notification.requestPermission().then(async (result) => {
       if (result === 'granted') {
-        getToken(messaging, {vapidKey: process.env.WEB_PUSH_PRIVATE_KEY}).then((currentToken) => {
-          if (currentToken) {
-            setToken(currentToken)
-          } else {
-            setToken('No registration token available. Request permission to generate one.');
-          }
-        }).catch((err) => {
-          setToken('An error occurred while retrieving token. ' + err);
-        });
+        
 
         //randomNotification();
       }
