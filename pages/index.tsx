@@ -28,7 +28,7 @@ export default function Home() {
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator && (window as any).workbox !== undefined) {
       // run only in browser
       navigator.serviceWorker.ready.then(reg => {
-        navigator.serviceWorker.register("../firebase-messaging-sw.js")
+        navigator.serviceWorker.register("./firebase-messaging-sw.js")
         const firebaseConfig = {
           apiKey: "AIzaSyDqUbUiCcRilLq8mJfo3p3csfUx9o6FN7E",
           authDomain: "canteen-e81e1.firebaseapp.com",
