@@ -68,7 +68,15 @@ export default function Home() {
   const notificationApp = async () => {
     Notification.requestPermission().then(async (result) => {
       if (result === 'granted') {
-        setToken(await getToken(messaging, {vapidKey: process.env.WEB_PUSH_PRIVATE_KEY}))
+        getToken(messaging, {vapidKey: process.env.WEB_PUSH_PRIVATE_KEY}).then((currentToken) => {
+          if (currentToken) {
+            setToken(currentToken)
+          } else {
+            setToken('No registration token available. Request permission to generate one.');
+          }
+        }).catch((err) => {
+          setToken('An error occurred while retrieving token. ' + err);
+        });
 
         //randomNotification();
       }
