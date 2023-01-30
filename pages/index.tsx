@@ -31,6 +31,26 @@ export default function Home() {
     });
   };
 
+  const notificationApp = () => {
+    Notification.requestPermission().then((result) => {
+      if (result === 'granted') {
+        randomNotification();
+      }
+    });
+  };
+
+  const randomNotification = () => {
+    const notif = Math.floor(Math.random() * 5) + 1;
+    const title = 'Notification ' + notif;
+    const options = {
+      body: 'This is the body of the notification',
+      icon: '/favicon.ico'
+    };
+    new Notification(title, options);
+    setTimeout(randomNotification, 5000);
+  };
+
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -38,6 +58,7 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
         <button onClick={installApp}>Install App</button>
+        <button onClick={notificationApp}>Accept Agreement to Notifications</button>
 
         <p className={styles.description}>
           Get started by editing{' '}
