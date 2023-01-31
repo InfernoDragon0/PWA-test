@@ -118,37 +118,16 @@ export default function Home() {
     setIsSubscribed(true)
     setToken('web push subscribed!')
     console.log(sub)
-    
   }
 
   const sendNotificationButtonOnClick = async (event:any) => {
     event.preventDefault()
     if (subscription == null) {
-      setToken('web push not subscribed, trying safari')
-      if ('safari' in window && 'pushNotification' in (window as any).safari) {
-        setToken(permissionData.permission  + " is permision")
-        var permissionData = (window as any).safari.pushNotification.permission('web.com.vercel.pwa-test-mauve-three');
-        if (permissionData.permission === 'default') {
-          // This is a new web service URL and its validity is unknown.
-          (window as any).safari.pushNotification.requestPermission(
-              'https://domain.example.com', // The web service URL.
-              'web.com.example.domain',     // The Website Push ID.
-              {}, // Data that you choose to send to your server to help you identify the user.
-              () => {}         // The callback function.
-          );
-        }
-        else if (permissionData.permission === 'denied') {
-            // The user said no.
-        }
-        else if (permissionData.permission === 'granted') {
-            // The web service URL is a valid push provider, and the user said yes.
-            // permissionData.deviceToken is now available to use.
-        }
-      }
+      setToken('web push not subscribed')
       return
     }
 
-    var data = await fetch('/api/notification', {
+    await fetch('/api/notification', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -157,9 +136,6 @@ export default function Home() {
         subscription
       })
     })
-
-    var datawait = await data.json()
-    setToken(JSON.stringify(datawait))
   }
 
   const randomNotification = () => {
