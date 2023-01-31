@@ -116,18 +116,18 @@ export default function Home() {
     // TODO: you should call your API to save subscription data on server in order to send web push notification from server
     setSubscription(sub)
     setIsSubscribed(true)
-    console.log('web push subscribed!')
+    setToken('web push subscribed!')
     console.log(sub)
   }
 
   const sendNotificationButtonOnClick = async (event:any) => {
     event.preventDefault()
     if (subscription == null) {
-      console.error('web push not subscribed')
+      setToken('web push not subscribed')
       return
     }
 
-    await fetch('/api/notification', {
+    var data = await fetch('/api/notification', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json'
@@ -136,6 +136,9 @@ export default function Home() {
         subscription
       })
     })
+
+    var datawait = await data.json()
+    setToken(JSON.stringify(datawait))
   }
 
   const randomNotification = () => {
